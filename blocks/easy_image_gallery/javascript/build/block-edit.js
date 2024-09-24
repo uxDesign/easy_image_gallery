@@ -58,7 +58,7 @@
             },
             done: function (e, data) {
                 var target = data.newItem ? data.newItem : $(e.target);
-                $.get(getFileDetailDetailJson,{fID:data.result[0].fID}, function(file) {
+                $.get(getFileDetailDetailJson,{fID:data.result.files[0].fID}, function(file) {
                     fillTemplate(file,target);
                 },'json');
             },
@@ -83,7 +83,7 @@
         var attachUploadEvent = function ($obj) {
             // On lance le fileupload
             $obj.fileupload(args);
-            $inputfile = $obj.find('input.browse-file');
+            $inputfile = $obj.find('input.browse-file');            
             $obj.find('.upload-file').on('click',function(e){
                 e.preventDefault();
                 $inputfile.click();
@@ -147,6 +147,9 @@
                   };
                 }
             });
+            $('#sort-button').click(function(){
+              sortUsingNestedText($('.easy_image-items'), "div.block-to-sort", "h4");
+            });
             if (file.link_type) displayLinkChooser($obj,file.link_type);
             // Faire en sorte que les infos restent visibles quand on edite le titre ou la description
             $obj.find('.editable-click').on('shown', function (data) {
@@ -158,7 +161,14 @@
 
         }
 
-
+        function sortUsingNestedText(parent, childSelector, keySelector) {
+          var items = parent.children(childSelector).detach().sort(function(a, b) {
+              var vA = $(keySelector, a).text();
+              var vB = $(keySelector, b).text();
+              return (vA < vB) ? -1 : (vA > vB) ? 1 : 0;
+          });
+         parent.append(items);
+        }
 
         fillTemplate = function (file,$element) {
 
@@ -273,15 +283,22 @@
 
         // -- Quand on choisi un Fileset -- \\
 
-        $('#fsID').change(function(e){
+        $('#fsID').change(function(e){            
             var r = e.removed;
             var a = e.added;
             if (typeof r === 'object') removeFileset(r.id);
             if (typeof a === 'object') addFileset(a.id);
-            // selectedFilesets = e.val;
-
         });
 
+        $('#fsID').on('select', function(e){           
+            var a = e.added;            
+            if (typeof a === 'object') addFileset(a.id);        
+        });
+
+        $('#fsID').on('unselect', function(e){           
+            var r = e.removed;          
+            if (typeof r === 'object') removeFileset(r.id);           
+        });
 
         // Simple option open
         $('#options-button').on('click',function(e){

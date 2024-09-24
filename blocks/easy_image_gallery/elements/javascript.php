@@ -15,15 +15,15 @@ $(document).ready(function(){
 
 });
 <?php if ($options->preloadImages) : ?>    
-$(window).load(function(){
-    var preloadImg = function (arrayOfImages) {
-        $(arrayOfImages).each(function(){
-            $('<img/>')[0].src = this;
-        });
-    }
-    var arrayOfImages = new Array();
-    $("#easy-gallery-<?php echo $bID?>").find('.img.intense').each(function(){arrayOfImages.push($(this).data('image'))});
-    preloadImg (arrayOfImages);
-});
+    $(window).on('load', function(){
+        var preloadImg = function (arrayOfImages) {
+            $(arrayOfImages).each(function(){
+                $('<img/>')[0].src = this;
+            });
+        }
+        var arrayOfImages = new Array();
+        $("#easy-gallery-<?php echo $bID?>").find('.img.intense').each(function(){arrayOfImages.push($(this).data('image'))});
+        preloadImg (arrayOfImages);
+    });
 <?php endif ?> 
 </script>

@@ -57,6 +57,7 @@ class Controller extends \Concrete\Core\Attribute\Controller  {
 	}
 
 	public function deleteKey() {
+		parent::deleteKey();
 		$db = Loader::db();
 		$arr = $this->attributeKey->getAttributeValueIDList();
 		foreach($arr as $id) {

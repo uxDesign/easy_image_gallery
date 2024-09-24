@@ -1,7 +1,7 @@
 <?php defined('C5_EXECUTE') or die("Access Denied.");
 $c = Page::getCurrentPage();
 if ($c->isEditMode()) : ?>
-    <div class="ccm-edit-mode-disabled-item" style="width: <?php echo $width; ?>; height: <?php echo $height; ?>">
+    <div class="ccm-edit-mode-disabled-item" style="width: <?php echo isset($width) ? "width: $width;" : ''; ?>; height: <?php echo isset($height) ? "height: $height;" : ''; ?>">
         <div style="padding: 40px 0px 40px 0px"><?php echo t('Easy Gallery disabled in edit mode.')?></div>
     </div>
 <?php
@@ -13,14 +13,14 @@ $type = \Concrete\Core\File\Image\Thumbnail\Type\Type::getByHandle('file_manager
     <?php $this->inc('elements/sortable.php') ?>
     <div class="clear"></div>
     </div>
-<div class="easy-gallery easy-gallery-masonry <?php if ($options->lightbox): ?>clickable<?php endif?>" id="easy-gallery-<?php echo $bID?>">
+<div class="easy-gallery easy-gallery-masonry <?php if ($options->lightbox): ?>clickable<? endif?>" id="easy-gallery-<?php echo $bID?>">
     <div class="e-col-<?php echo $options->galleryColumns?> grid-sizer"></div>
 <?php foreach ($files as $key => $f) :
     $galleryHasImage = true;
     $placeHolderUrl = $this->getBlockURL() . "/images/placeholders/placeholder-{$f->getAttribute('width')}-{$f->getAttribute('height')}.png";
     $imageColumn = $f->getAttribute('gallery_columns') ? $f->getAttribute('gallery_columns') : $options->galleryColumns;
     $retinaThumbnailUrl = $f->getThumbnailURL($type->getDoubledVersion());
-    $fullUrl = $view->controller->getImageLink($f,$options);
+    $fullUrl = $view->controller->getImageLink($f, $options);
     $tags = isset($tagsObject->fileTags[$f->getFileID()]) ? implode(' ',$tagsObject->fileTags[$f->getFileID()]) : '';
     ?>
     <div class="img masonry-item-collapsed masonry-item e-col-<?php echo $imageColumn ?> <?php echo $tags ?>">

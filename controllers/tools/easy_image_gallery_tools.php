@@ -16,8 +16,8 @@ class EasyImageGalleryTools extends RouteController
 {
     public function save()
     {
-    $this->file = File::getByID($_REQUEST['fID']);
-     $fp = new Permissions($this->file);
+        $this->file = File::getByID($_REQUEST['fID']);
+        $fp = new Permissions($this->file);
         if ($fp->canEditFileProperties()) {
             $fv = $this->file->getVersionToModify();
             $value = $_REQUEST['value'];
@@ -34,7 +34,7 @@ class EasyImageGalleryTools extends RouteController
                 default:
                     $ak = FileAttributeKey::getByHandle($_REQUEST['name']);
                     if (is_object($ak)) :
-                      $ak->setAttribute($fv,$value);
+                      $fv->setAttribute($ak,$value);
                     endif;
                   break;
             }

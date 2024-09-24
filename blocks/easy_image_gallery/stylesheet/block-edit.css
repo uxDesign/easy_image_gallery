@@ -249,3 +249,11 @@ div.image-item.fileset .img {
 .ccm-ui .popover.top {
 z-index: 9999; /* To go up of the tool bar */
 }
+
+.easy-image-toolbar .select2-container{
+  width: 160px;
+}
+
+.easy-image-toolbar .select2-container--default .select2-selection--multiple .select2-selection__choice{
+  padding: 10px 5px 10px 5px;
+}

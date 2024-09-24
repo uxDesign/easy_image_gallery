@@ -5,7 +5,7 @@ $type = \Concrete\Core\File\Image\Thumbnail\Type\Type::getByHandle('file_manager
 
 if (is_array($files) && count($files)) :
 ?>
-    <div class="easy-gallery easy-gallery-boxes easy-gallery-boxes-basic <?php if($options->lightbox) : ?>clickable<?php endif?>" id="easy-gallery-<?php echo $bID?>">
+    <div class="easy-gallery easy-gallery-boxes easy-gallery-boxes-basic <?php if($options->lightbox) : ?>clickable<? endif?>" id="easy-gallery-<?php echo $bID?>">
         <div class="b-col-<?php echo $options->galleryColumns?> grid-sizer"></div>
     <?php foreach ($files as $key => $f) :
         // $f = File::getByID($fID);
@@ -14,7 +14,7 @@ if (is_array($files) && count($files)) :
         $thumbnailUrl = $f->getThumbnailURL($type->getBaseVersion());
         $imageColumn = $f->getAttribute('gallery_columns') ? $f->getAttribute('gallery_columns') : $options->galleryColumns;
         $retinaThumbnailUrl = $f->getThumbnailURL($type->getDoubledVersion());
-        $fullUrl = $view->controller->getImageLink($f,$options);
+        $fullUrl = $view->controller->getImageLink($f, $options);
         $tag = ($fullUrl || $options->lightbox) ? 'a' : 'span';
         $ratio = $f->getAttribute('image_ratio');
         $w = intval($f->getAttribute('width'));
@@ -23,18 +23,22 @@ if (is_array($files) && count($files)) :
         ?>
         <?php if ($key%$options->galleryColumns == 0) : ?><div class="row"><?php endif ?>
         <div class="box-wrap b-col-<?php echo $options->galleryColumns?> gutter">
-            <<?php echo $tag ?> class="img <?php echo $ratio ?>"
-                style="background-image:url(<?php echo $retinaThumbnailUrl ?>); background-image: -webkit-image-set(url(<?php echo $thumbnailUrl ?>) 1x, url(<?php echo $retinaThumbnailUrl ?>) 2x);"
+            <<?php echo $tag ?> class="img <?php echo $ratio 
+                    ?>" style="background-image:url(<?php echo $retinaThumbnailUrl 
+                    ?>); background-image: -webkit-image-set(url(<?php echo $thumbnailUrl 
+                    ?>) 1x, url(<?php echo $retinaThumbnailUrl ?>) 2x);"
                 <?php if($fullUrl) : ?>
-                href="<?php echo $fullUrl ?>"
+                    href="<?php echo $fullUrl ?>"
                 <?php endif ?>
-                 <?php if($options->lightbox) : ?>
-                data-image="<?php echo $fullUrl ?>"
-                data-fancybox-group="gallery-<?php echo $bID ?>"
-                <?php if($options->lightboxTitle) : ?> title="<?php echo $f->getTitle() ?> <?php if($options->lightboxDescription &&  $f->getDescription()) echo " - " . $f->getDescription(); ?>" <?php endif ?>
+                <?php if($options->lightbox) : ?>
+                    data-image="<?php echo $fullUrl ?>"
+                    data-fancybox-group="gallery-<?php echo $bID ?>"
+                    <?php if($options->lightboxTitle) : ?> title="<?php echo $f->getTitle() ?> 
+                        <?php if($options->lightboxDescription &&  $f->getDescription()) echo " - " . $f->getDescription(); ?>" 
+                    <?php endif ?>
                 <?php endif ?>
                 >
-
+                
             </<?php echo $tag ?>>
             <div class="loader"><i class="fa fa-circle-o-notch fa-spin"></i></div>
 
@@ -49,8 +53,8 @@ if (is_array($files) && count($files)) :
         <div class="clear" style="clear:both"></div>
     </div><!-- .easy-gallery -->
 
-    <?php if($galleryHasImage) : ?>
-    <?php $this->inc('elements/javascript.php') ?>
-    <?php $this->inc('elements/css.php') ?>
+    <?php if(isset($galleryHasImage)) : ?>
+        <?php $this->inc('elements/javascript.php') ?>
+        <?php $this->inc('elements/css.php') ?>
     <?php endif ?>
 <?php endif ?>
