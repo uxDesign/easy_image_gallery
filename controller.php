@@ -15,8 +15,8 @@ use Concrete\Package\EasyImageGallery\Src\Helper\MclInstaller;
 class Controller extends \Concrete\Core\Package\Package {
 
     protected $pkgHandle = 'easy_image_gallery';
-    protected $appVersionRequired = '5.8';
-    protected $pkgVersion = '1.4.2';
+    protected $appVersionRequired = '9.2';
+    protected $pkgVersion = '1.5.0';
     protected $pkg;
 
     public function getPackageDescription() {
@@ -64,7 +64,7 @@ class Controller extends \Concrete\Core\Package\Package {
             $this );
 
         /* https://vitalets.github.io/x-editable/ */
-        $al->register( 'javascript', 'editable', 'blocks/easy_image_gallery/javascript/build/bootstrap5-editable.js', 
+        $al->register( 'javascript', 'editable', 'blocks/easy_image_gallery/javascript/build/bootstrap5-editable.min.js', 
             array('version' => '1.5.3', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => true), 
             $this ); 
         $al->register( 'css', 'editable', 'blocks/easy_image_gallery/stylesheet/bootstrap5-editable.css',         
@@ -74,7 +74,7 @@ class Controller extends \Concrete\Core\Package\Package {
 
         /* was removed with C5 v9, we put it here */
         /* https://github.com/select2/select2 */
-        $al->register( 'javascript', 'select2', 'blocks/easy_image_gallery/javascript/build/select2.js', 
+        $al->register( 'javascript', 'select2', 'blocks/easy_image_gallery/javascript/build/select2.min.js', 
             array('version' => '3.5.3', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => false), 
             $this );
         $al->register( 'css', 'select2', 'blocks/easy_image_gallery/stylesheet/select2.css', 
@@ -98,7 +98,7 @@ class Controller extends \Concrete\Core\Package\Package {
             array('version' => '4.2.2', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => true), 
             $this );
         /* https://github.com/desandro/imagesloaded */            
-        $al->register( 'javascript', 'imagesloaded', 'blocks/easy_image_gallery/javascript/build/imagesloaded.pkgd.js', 
+        $al->register( 'javascript', 'imagesloaded', 'blocks/easy_image_gallery/javascript/build/imagesloaded.pkgd.min.js', 
             array('version' => '4.1.4', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => true), 
             $this );
         /* https://isotope.metafizzy.co */            
@@ -106,7 +106,7 @@ class Controller extends \Concrete\Core\Package\Package {
             array('version' => '3.1.4', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => true), 
             $this );
         /* https://github.com/tuupola/jquery_lazyload */            
-        $al->register( 'javascript', 'lazyload', 'blocks/easy_image_gallery/javascript/build/jquery.lazyload.js', 
+        $al->register( 'javascript', 'lazyload', 'blocks/easy_image_gallery/javascript/build/jquery.lazyload.min.js', 
             array('version' => '1.9.7', 'position' => Asset::ASSET_POSITION_FOOTER, 'minify' => false, 'combine' => true), 
             $this );    
     }
